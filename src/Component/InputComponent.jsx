@@ -3,22 +3,7 @@ import { Datepicker } from "flowbite-datepicker";
 import CardComponent from "./CardComponent";
 export default function InputComponent() {
   const [book, setBook] = useState({});
-  const [books, setBooks] = useState([
-    {
-      bookTitle: "Book 1",
-      author: "asds",
-      publishedDate: "12/12/2024",
-      edition: "1",
-      qty: 10,
-    },
-    {
-      bookTitle: "Book 1",
-      author: "asds",
-      publishedDate: "12/12/2024",
-      edition: "1",
-      qty: 10,
-    },
-  ]);
+  const [books, setBooks] = useState([]);
   //   date picker
   useEffect(() => {
     const dateInput = document.getElementById("default-datepicker");
