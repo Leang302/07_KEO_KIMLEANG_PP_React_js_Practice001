@@ -6,13 +6,19 @@ export default function InputComponent() {
   const [books, setBooks] = useState([]);
   //   date picker
   useEffect(() => {
-    const dateInput = document.getElementById("default-datepicker");
+    const dateInput = document.getElementById("publishedDate");
     if (dateInput) {
       new Datepicker(dateInput, {
         format: "mm-dd-yyyy",
         autohide: true,
       });
     }
+    dateInput.addEventListener("changeDate", (e) => {
+      setBook((prevBook) => ({
+        ...prevBook,
+        publishedDate: e.target.value,
+      }));
+    });
   }, []);
   //handle input change
   const handleInputChange = (e) => {
@@ -22,13 +28,11 @@ export default function InputComponent() {
   //add new book
   const addNewBook = (e) => {
     e.preventDefault();
-    console.log("run");
-
     setBooks([...books, book]);
   };
-  useEffect(() => {
-    console.log(books);
-  }, [books]);
+  // useEffect(() => {
+  //   console.log(books);
+  // }, [books]);
   return (
     <>
       <h3 className="text-center my-10 text-3xl font-bold ">
@@ -97,7 +101,7 @@ export default function InputComponent() {
               </div>
               <input
                 onChange={handleInputChange}
-                id="default-datepicker"
+                id="publishedDate"
                 name="publishedDate"
                 datepicker-format="mm-dd-yyyy"
                 type="text"
@@ -153,8 +157,8 @@ export default function InputComponent() {
       </form>
       {/* list of card */}
       <div className="mt-6 w-[80%] mx-auto grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-        {books?.map((book) => (
-          <CardComponent book={book} />
+        {books?.map((book, i) => (
+          <CardComponent book={book} key={i} />
         ))}
       </div>
     </>
